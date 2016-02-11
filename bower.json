@@ -1,0 +1,23 @@
+{
+  "name": "madtom.xyz",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Thomas Mulloy <twmulloy@gmail.com>"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "webfontloader": "^1.6.21",
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0"
+  }
+}
