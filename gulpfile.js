@@ -2,7 +2,8 @@ var gulp = require('gulp'),
   connect = require('gulp-connect'),
   concat = require('gulp-concat'),
   del = require('del'),
-  gulpif = require('gulp-if');
+  gulpif = require('gulp-if'),
+  fileinclude = require('gulp-file-include');
 
 var min = {
   script: require('gulp-uglify'),
@@ -26,6 +27,7 @@ var manifest = {
     path.bower + '/webfontloader/webfontloader.js',
     path.bower + '/angular/angular.js',
     path.bower + '/angular-animate/angular-animate.js',
+    path.bower + '/angular-sanitize/angular-sanitize.js',
     path.src + '/script.coffee'
   ],
   styles: [
@@ -39,64 +41,27 @@ var manifest = {
 
 gulp.task('connect', function () {
   connect.server({
-    root: [path.src, path.dist],
+    root: path.dist,
     livereload: true
   });
 });
 
-gulp.task('script', function () {
-  var opts = {}
-
-  return gulp.src(manifest.scripts)
-    .pipe(gulpif(/[.]coffee$/, dsl.coffee()))
-    .pipe(min.script(opts))
-    .pipe(concat('script.js'))
-    .pipe(gulp.dest(path.dist))
-    .pipe(connect.reload());
-});
-
-gulp.task('style', function () {
-  var opts = {};
-
-  return gulp.src(manifest.styles)
-    .pipe(dsl.stylus())
-    .pipe(min.style(opts))
-    .pipe(concat('style.css'))
-    .pipe(gulp.dest(path.dist))
-    .pipe(connect.reload());
-});
-
-gulp.task('html', function () {
-  // https://github.com/kangax/html-minifier#options-quick-reference
-  var opts = {
-    removeComments: true,
-    collapseWhitespace: true,
-    minifyJS: true,
-    minifyCSS: true,
-    processScripts: ['text/ng-template']
-  };
-
+gulp.task('html', ['assets'], function () {
   return gulp.src(manifest.htmls)
-    .pipe(min.html(opts))
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: path.dist
+    }))
+    .pipe(min.html({
+      removeComments: true,
+      collapseWhitespace: true,
+      minifyJS: true,
+      minifyCSS: true,
+      processScripts: ['text/ng-template'] 
+    }))
     .pipe(concat('index.html'))
     .pipe(gulp.dest(path.dist))
     .pipe(connect.reload());
-});
-
-gulp.task('watch', function () {
-  gulp.watch([
-    path.src + '/*.js',
-    path.src + '/*.coffee'
-  ], ['script']
-    );
-  gulp.watch([
-    path.src + '/*.css',
-    path.src + '/*.styl'
-  ], ['style']
-    );
-  gulp.watch([
-    path.src + '/*.html'
-  ], ['html']);
 });
 
 gulp.task('clean', function () {
@@ -105,6 +70,34 @@ gulp.task('clean', function () {
   });
 });
 
-gulp.task('build', ['clean', 'script', 'style', 'html']);
+gulp.task('build', ['clean', 'html']);
+
+gulp.task('style', function () {
+  return gulp.src(manifest.styles)
+    .pipe(gulpif(/[.]styl$/, dsl.stylus()))
+    .pipe(min.style({}))
+    .pipe(concat('style.css'))
+    .pipe(gulp.dest(path.dist));
+});
+
+gulp.task('script', function () {    
+  return gulp.src(manifest.scripts)
+    .pipe(gulpif(/[.]coffee$/, dsl.coffee()))
+    .pipe(min.script({}))
+    .pipe(concat('script.js'))
+    .pipe(gulp.dest(path.dist));
+});
+
+gulp.task('assets', ['style', 'script']);
+
+gulp.task('watch', function () {
+  return gulp.watch([
+    path.src + '/*.css',
+    path.src + '/*.styl',
+    path.src + '/*.js',
+    path.src + '/*.coffee',
+    path.src + '/*.html'
+  ], ['html']);
+});
 
 gulp.task('default', ['build', 'connect', 'watch']);

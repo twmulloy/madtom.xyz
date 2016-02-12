@@ -27,24 +27,87 @@ ga 'create', 'UA-10404219-5', 'auto'
 ga 'send', 'pageview'
 
 ## Angular
-angular.module('controllers', [])
+angular
+  .module('controllers', [])
+  
   .controller('body', [
     '$scope'
-    ($scope) ->
-      console.log 'body controller'
-      return
-  ])
-  .controller('main', [
-    '$scope'
-    ($scope) ->
-      console.log 'main controller'
-      return
-  ])
+    'pages'
+    ($scope, pages) ->
     
-angular.module('app', [
+      $scope.pages = pages
+      
+      # Build pages array to 3 items
+      if pages.length is 1
+        $scope.pages.push angular.copy pages[0]
+        
+      if pages.length is 2
+        $scope.pages.unshift angular.copy pages[pages.length-1]
+        
+      if pages.length > 2
+        $scope.pages.unshift do $scope.pages.pop
+        
+      $scope.page_change = (change) ->
+        return if change is 0
+        
+        if change < 0
+          $scope.pages.unshift do $scope.pages.pop
+        else if change > 0
+          $scope.pages.push do $scope.pages.shift
+          
+        $scope.$applyAsync ->
+          console.log 'changed page'
+
+      $scope.$on 'page:change', (e, page) ->
+        index = $scope.pages.indexOf page
+        change = index-1
+        $scope.page_change(change)
+      
+      return
+  ])
+  
+angular
+  .module('directives', [])
+  
+  .directive('pageAnchor', [
+    ->
+      restrict: 'A'
+      scope:
+        page: '='
+      link: (scope, el, attrs) ->
+        el[0].addEventListener 'click', ->
+          scope.$emit 'page:change', scope.page
+        return
+  ])
+
+angular
+  .module('app', [
     'ngAnimate'
+    'ngSanitize'
     'controllers'
-  ]).run([
+    'directives'
+  ])
+ 
+  .constant('pages', [
+    name: 'home'
+    title: 'Madeline &amp; Thomas'
+    templateUrl: 'home.html'
+  ,
+    name: 'visitors'
+    title: 'Visiting Seattle'
+    templateUrl: 'visitors.html'
+  ,
+    name: 'registry'
+    title: 'Registries'
+    templateUrl: 'registry.html'
+  ])
+  
+  .config([
+    ->
+      return
+  ])
+  
+  .run([
     '$templateCache'
     ($templateCache) ->
       templates = document.querySelectorAll 'script[type="text/ng-template"]'
