@@ -8,6 +8,7 @@ html
 * 
   box-sizing inherit
   margin 0
+  outline 0
   padding 0
   
   &:before,
@@ -26,36 +27,23 @@ h2
 body
   Playfair()
   font-size 1.0em
-  min-height 100vh
-  overflow-x hidden
   
   > header
     font-size 3.6rem
     position fixed
+    text-align center
     width 100%
     z-index 1
     
-    > nav
-      text-align center
+    > a
+      display inline-block
+      padding 0 2.4rem
       
-      > a
-        display inline-block
+      &.active
+        cursor auto
+      
 
   > main  
     font-size 1.8rem
-  
-    > section
-      height 100%
-      position absolute
-      width 80%
-      
-      &:nth-child(1)
-        transform(translateX(-87.5%))
-        cursor pointer
-        
-      &:nth-child(2)
-        transform(translateX(12.5%))
-        
-      &:nth-child(3)
-        transform(translateX(112.5%))
-        cursor pointer
+    padding 10.0rem 0
+   

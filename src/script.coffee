@@ -32,51 +32,117 @@ angular
   
   .controller('body', [
     '$scope'
+    '$filter'
     'pages'
-    ($scope, pages) ->
-    
+    ($scope, $filter, pages) ->
       $scope.pages = pages
       
-      # Build pages array to 3 items
-      if pages.length is 1
-        $scope.pages.push angular.copy pages[0]
+      $scope.nav_pages = []
+      
+      if angular.isArray pages
+        $scope.nav_pages = angular.copy pages
         
-      if pages.length is 2
-        $scope.pages.unshift angular.copy pages[pages.length-1]
+      if $scope.nav_pages.length is 1
+        $scope.nav_pages.push angular.copy $scope.nav_pages[0]
         
-      if pages.length > 2
-        $scope.pages.unshift do $scope.pages.pop
+      if $scope.nav_pages.length is 2
+        $scope.nav_pages.push angular.copy $scope.nav_pages[1]
         
-      $scope.page_change = (change) ->
+      if $scope.nav_pages.length > 2
+        $scope.nav_pages.unshift do $scope.nav_pages.pop
+        
+      
+      rotate = (arr, change) ->
         return if change is 0
         
-        if change < 0
-          $scope.pages.unshift do $scope.pages.pop
-        else if change > 0
-          $scope.pages.push do $scope.pages.shift
+        if change is -1
+          arr.unshift do arr.pop
+        else if change is 1
+          arr.push do arr.shift 
           
-        $scope.$applyAsync ->
-          console.log 'changed page'
-
-      $scope.$on 'page:change', (e, page) ->
-        index = $scope.pages.indexOf page
-        change = index-1
-        $scope.page_change(change)
+        do $scope.$apply
       
+      $scope.$on 'nav:rotate', (e, direction) ->
+        return unless direction is 'right' or direction is 'left'
+        rotate $scope.nav_pages, if direction is 'right' then -1 else 1
+      
+      $scope.$on 'nav:change', (e, scope) ->
+        rotate $scope.nav_pages, scope.$index - 1
+    
       return
   ])
   
 angular
   .module('directives', [])
   
-  .directive('pageAnchor', [
-    ->
+  .directive('slick', [
+    '$timeout'
+    ($timeout) ->
       restrict: 'A'
       scope:
-        page: '='
+        pages: '='
+      # controller:  [
+      #   '$scope'
+      #   ($scope) ->
+      #     return
+      # ]
+      link: (scope, el, attrs, ctrl) ->
+       
+        # Slick methods
+        
+        $(el).on 'swipe', (e, slick, direction) ->
+          scope.$emit 'nav:rotate', direction
+
+        # $(el).on 'beforeChange', (e, slick, current, next) ->
+        #   console.log 'before', arguments 
+         
+        # $(el).on 'afterChange', (e, slick, current) ->
+        #   console.log 'after', arguments
+          
+        next = ->
+          $(el).slick 'slickNext'
+          
+        scope.$on 'slick:next', next
+          
+        back = ->
+          $(el).slick 'slickPrev'
+          
+        scope.$on 'slick:back', back
+          
+        go = (e, index) ->
+          $(el).slick 'slickGoTo', index
+          
+        scope.$on 'slick:go', go
+            
+        # Custom helpers
+        scope.$on 'slick:anchor', (e, anchor_scope) ->
+          if anchor_scope.$index is 0
+          	do back
+          else if anchor_scope.$index is 2
+            do next
+            
+        $timeout ->
+          $(el).slick
+            centerMode: true
+            centerPadding: '8%'
+            lazyLoad: 'ondemand'
+            infinite: true
+            arrows: false
+            speed: 500
+            cssEase: 'linear'
+            
+        return
+  ])
+  
+  .directive('slickAnchor', [
+    '$timeout'
+    ($timeout) ->
+      restrict: 'A'
       link: (scope, el, attrs) ->
-        el[0].addEventListener 'click', ->
-          scope.$emit 'page:change', scope.page
+        el.on 'click', (e) ->
+          scope.$root.$broadcast 'slick:anchor', scope
+          scope.$emit 'nav:change', scope
+
         return
   ])
 

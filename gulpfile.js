@@ -28,9 +28,12 @@ var manifest = {
     path.bower + '/angular/angular.js',
     path.bower + '/angular-animate/angular-animate.js',
     path.bower + '/angular-sanitize/angular-sanitize.js',
+    path.bower + '/jquery/dist/jquery.js',
+    path.bower + '/slick-carousel/slick/slick.js',
     path.src + '/script.coffee'
   ],
   styles: [
+    path.bower + '/slick-carousel/slick/slick.css',
     path.src + '/style.styl'
   ],
   htmls: [

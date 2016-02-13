@@ -1,23 +1,21 @@
 <body ng-controller="body">
   
-  <header ng-include="'header.html'"></header>
-  <main   ng-include="'main.html'"></main>
+  <header ng-include="'header.html'" ></header>
+  <main   ng-include="'main.html'" slick pages="pages"></main>
   
   <script type="text/ng-template" id="header.html">
-    <nav>
-      <a ng-repeat="page in pages | limitTo: 3"
-        page-anchor page="page"  
-        ng-class="{}"
-      >
-        <h1 ng-bind-html="page.title"></h1>
-      </a>
-    </nav>
+    <a ng-repeat="page in nav_pages | limitTo:3"
+      ng-class="{
+        active: ($index === 1)
+      }"
+      slick-anchor
+    >
+      <h1 ng-bind-html="page.title"></h1>
+    </a>
   </script>
 
   <script type="text/ng-template" id="main.html">
-    <section ng-repeat="page in pages | limitTo: 3" 
-      id="{{ page.name | lowercase }}" 
-      ng-class="{}"
+    <section ng-repeat="page in pages" 
       ng-include 
       src="page.templateUrl"
     ></section>
