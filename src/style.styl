@@ -1,6 +1,8 @@
 @require '_mixin'
 @require '_font'
 
+@import '_ease'
+
 html
   box-sizing border-box
   font-size 62.5%
@@ -17,12 +19,14 @@ html
     
 a
   cursor pointer
-  
-h1
-  Oswald()
-  
-h2 
-  Dosis()
+
+.cover
+  transition(opacity 500ms $easeInOutCubic)  
+  background-color black
+  height 100%
+  position absolute
+  top 0
+  width 100%
     
 body
   Playfair()
@@ -30,20 +34,60 @@ body
   
   > header
     font-size 3.6rem
-    position fixed
+    height 30.0rem
+    position absolute
     text-align center
     width 100%
     z-index 1
     
-    > a
-      display inline-block
-      padding 0 2.4rem
-      
+    a
+      display block
+        
+      h1
+        Oswald()
+
       &.active
         cursor auto
-      
+        h1
+          font-weight 700      
 
   > main  
     font-size 1.8rem
-    padding 10.0rem 0
-   
+    
+    
+    .page
+      min-height 100vh
+      padding 30.0rem 0 0
+      position relative
+                
+      .content
+
+        padding 0 2.0rem
+        
+	      header
+          border-bottom 3px solid black
+          margin-bottom 1px
+           
+        main
+          vendor('column-count', 3)
+          vendor('column-rule', 1px solid black)
+          vendor('column-gap', 2.0rem)
+          
+          border-top 1px solid black
+          
+          article
+            h2
+              Dosis()
+          
+          
+          
+
+          
+      &.slick-slide
+        .cover
+          opacity .05
+      
+      &.slick-center
+        .cover
+          opacity 0
+      

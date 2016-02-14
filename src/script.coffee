@@ -2,7 +2,7 @@
 WebFont.load
   google:
     families: [
-      'Oswald:400:latin' 
+      'Oswald:400,700:latin' 
       'Dosis:500:latin'
       'Playfair+Display:400:latin'
     ]
@@ -43,14 +43,13 @@ angular
         $scope.nav_pages = angular.copy pages
         
       if $scope.nav_pages.length is 1
-        $scope.nav_pages.push angular.copy $scope.nav_pages[0]
+        $scope.nav_pages.push angular.copy pages[0]
         
       if $scope.nav_pages.length is 2
-        $scope.nav_pages.push angular.copy $scope.nav_pages[1]
+        $scope.nav_pages.push angular.copy pages[1]
         
       if $scope.nav_pages.length > 2
         $scope.nav_pages.unshift do $scope.nav_pages.pop
-        
       
       rotate = (arr, change) ->
         return if change is 0
@@ -129,7 +128,9 @@ angular
             infinite: true
             arrows: false
             speed: 500
-            cssEase: 'linear'
+            useTransform: true
+            cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)' # $easeInOutCubic
+            
             
         return
   ])
@@ -166,6 +167,10 @@ angular
     name: 'registry'
     title: 'Registries'
     templateUrl: 'registry.html'
+  ,
+    name: 'contact'
+    title: 'Contact'
+    templateUrl: 'contact.html'
   ])
   
   .config([
