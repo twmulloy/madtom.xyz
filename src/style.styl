@@ -27,23 +27,16 @@ a
   color inherit
   cursor pointer
 
-i[class^='icon-']
-  font-size 12.8rem
-
 .cover
-  transition opacity 600ms $easeInOutCubic, visibility 600ms $easeInOutCubic
+  transition opacity 250ms $easeInOutCubic, visibility 250ms $easeInOutCubic
   background-color black
   height 1000%
   position absolute
   top 0
   width 100%
   
-.svg
-  background-position center center
-  background-repeat no-repeat
-  background-size cover
-  height 100px
-  width 200px
+.span-all
+  vendor 'column-span', all
 
 body
   Playfair()
@@ -54,7 +47,16 @@ body
 
   > main  
     font-size 1.6rem
-   
+    
+    .slick-list
+
+      &.draggable
+        cursor -webkit-grab
+        cursor grab
+        &:active
+          cursor -webkit-grabbing
+          cursor grabbing
+
     .page
       min-height 100vh
       position relative
@@ -63,10 +65,11 @@ body
         padding 4.0rem
         
 	      header
-          margin-bottom .1rem
+          margin-bottom 1.0rem
+          text-align justify
           
           h1
-            Oswald(6.4rem)
+            Oswald 6.4rem
             word-spacing 2.0rem
             
         .divider
@@ -75,7 +78,7 @@ body
           padding .1rem 0
           
           .inner
-            Playfair(1.6rem, 700, true)
+            Playfair 1.6rem, 700, true
             border-top .1rem solid black
             border-bottom .3rem solid black
             line-height 2
@@ -89,34 +92,23 @@ body
           vendor 'column-rule', .1rem solid black
           
           article
-            h2, h3
-              Dosis(3.2rem, 700)
-              
-              &:after
-                background-color black
-                border-bottom .1rem solid black
-                content ''
-                display block
-                height 0
-                margin 0 auto
-                margin-top 1.0rem
-                position relative
-                width 50%
-                
+            h2
+              Dosis 3.2rem, 700
+              line 25%  
             h3
-              Playfair(2.4rem, 700, false)
-              
+              Playfair 2.4rem, 700, false
+              line 25%
             p
               vendor 'word-break', break-all
               vendor 'hyphens', auto
               
               line-height 1.5
               text-align justify
-              text-indent 4.0rem
+              text-indent 2.0rem
               word-break break-word
               
-          .span-all
-            vendor 'column-span', all
+            *:last-child
+              margin-bottom .5rem
               
           @media mq_small
             vendor 'column-count', 1
@@ -128,11 +120,25 @@ body
      
       &.slick-slide
         .cover
-          opacity .05
+          cursor pointer
+          opacity .03
           visibility visible
+          
+          &:hover
+            transition opacity 250ms $easeInOutCubic
+            opacity 0
+            
       
       &.slick-center
+        transition box-shadow 250ms $easeInOutCubic 500ms
+
+        background-color white
+        box-shadow 0 0 .3rem rgba(27, 25, 25, .1)
+        z-index 1
+        
         .cover
           opacity 0
           visibility hidden
           
+
+      

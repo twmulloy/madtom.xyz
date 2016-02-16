@@ -30,10 +30,12 @@ var manifest = {
     path.bower + '/angular-sanitize/angular-sanitize.js',
     path.bower + '/jquery/dist/jquery.js',
     path.bower + '/slick-carousel/slick/slick.js',
+    path.bower + '/slabText/js/jquery.slabtext.js',
     path.src + '/script.coffee'
   ],
   styles: [
     path.bower + '/slick-carousel/slick/slick.css',
+    path.bower + '/slabText/css/slabtext.css',
     path.src + '/icons.css',
     path.src + '/style.styl'
   ],

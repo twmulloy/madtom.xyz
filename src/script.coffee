@@ -9,6 +9,11 @@ WebFont.load
     ]
     
   active: ->
+  
+    $('h1', '#main .page .content > header').slabText
+      fontRatio: 0.5
+      maxFontSize: 128
+      
     $(window).trigger 'resize'
 
 ## Google Analytics
@@ -83,7 +88,7 @@ angular
 
           $el.slick
             centerMode: true
-            centerPadding: '10vw'
+            centerPadding: '7.5vw'
             lazyLoad: 'ondemand'
             infinite: true
             arrows: false
@@ -92,6 +97,17 @@ angular
             cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)' # $easeInOutCubic
             adaptiveHeight: true
             mobileFirst: true
+            
+          el.on 'click', (e) ->
+            element = e.target
+            if element.className is 'cover'
+              slick = $el.slick 'getSlick'
+              current_w = slick.$slides[slick.currentSlide].offsetWidth
+              if e.clientX > current_w
+                $el.slick 'slickNext'
+              else if e.clientX < current_w
+                $el.slick 'slickPrev'
+          
             
           $($window).on 'resize', (e) ->
             delay ->
