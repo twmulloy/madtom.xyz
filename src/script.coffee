@@ -1,11 +1,15 @@
 ## Google Fonts
 WebFont.load
+
   google:
     families: [
       'Oswald:400,700:latin' 
-      'Dosis:500:latin'
-      'Playfair+Display:400:latin'
+      'Dosis:400,500,700:latin'
+      'Playfair+Display:400,700:latin'
     ]
+    
+  active: ->
+    $(window).trigger 'resize'
 
 ## Google Analytics
 ((i, s, o, g, r, a, m) ->
@@ -36,38 +40,6 @@ angular
     'pages'
     ($scope, $filter, pages) ->
       $scope.pages = pages
-      
-      $scope.nav_pages = []
-      
-      if angular.isArray pages
-        $scope.nav_pages = angular.copy pages
-        
-      if $scope.nav_pages.length is 1
-        $scope.nav_pages.push angular.copy pages[0]
-        
-      if $scope.nav_pages.length is 2
-        $scope.nav_pages.push angular.copy pages[1]
-        
-      if $scope.nav_pages.length > 2
-        $scope.nav_pages.unshift do $scope.nav_pages.pop
-      
-      rotate = (arr, change) ->
-        return if change is 0
-        
-        if change is -1
-          arr.unshift do arr.pop
-        else if change is 1
-          arr.push do arr.shift 
-          
-        do $scope.$apply
-      
-      $scope.$on 'nav:rotate', (e, direction) ->
-        return unless direction is 'right' or direction is 'left'
-        rotate $scope.nav_pages, if direction is 'right' then -1 else 1
-      
-      $scope.$on 'nav:change', (e, scope) ->
-        rotate $scope.nav_pages, scope.$index - 1
-    
       return
   ])
   
@@ -76,73 +48,58 @@ angular
   
   .directive('slick', [
     '$timeout'
-    ($timeout) ->
+    '$window'
+    ($timeout, $window) ->
       restrict: 'A'
       scope:
         pages: '='
-      # controller:  [
-      #   '$scope'
-      #   ($scope) ->
-      #     return
-      # ]
       link: (scope, el, attrs, ctrl) ->
-       
-        # Slick methods
-        
-        $(el).on 'swipe', (e, slick, direction) ->
-          scope.$emit 'nav:rotate', direction
+      
+        delay = do ->
+          timer = 0
+          (callback, ms) ->
+            clearTimeout timer
+            timer = setTimeout(callback, ms)
+            return
+      
+        setup = ->
+      
+          $el = $(el)
+          
+          # Slick methods
+          after = (e, slick, current) ->
+            $current = $(slick.$slides[current])
+            $current.siblings().height do $current.height 
+            
+          $el.on 'init', (e, slick) ->
+            after e, slick, slick.currentSlide
+            
+          $el.on 'beforeChange', (e, slick, current, next) ->
+            slick.$slides.height ''
+     
+          $el.on 'afterChange', after
+          
+          # $el.on 'swipe', (e, slick, direction) ->
 
-        # $(el).on 'beforeChange', (e, slick, current, next) ->
-        #   console.log 'before', arguments 
-         
-        # $(el).on 'afterChange', (e, slick, current) ->
-        #   console.log 'after', arguments
-          
-        next = ->
-          $(el).slick 'slickNext'
-          
-        scope.$on 'slick:next', next
-          
-        back = ->
-          $(el).slick 'slickPrev'
-          
-        scope.$on 'slick:back', back
-          
-        go = (e, index) ->
-          $(el).slick 'slickGoTo', index
-          
-        scope.$on 'slick:go', go
-            
-        # Custom helpers
-        scope.$on 'slick:anchor', (e, anchor_scope) ->
-          if anchor_scope.$index is 0
-          	do back
-          else if anchor_scope.$index is 2
-            do next
-            
-        $timeout ->
-          $(el).slick
+          $el.slick
             centerMode: true
-            centerPadding: '8%'
+            centerPadding: '10vw'
             lazyLoad: 'ondemand'
             infinite: true
             arrows: false
-            speed: 500
+            speed: 600
             useTransform: true
             cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)' # $easeInOutCubic
+            adaptiveHeight: true
+            mobileFirst: true
             
+          $($window).on 'resize', (e) ->
+            delay ->
+              slick = $el.slick 'getSlick'
+              slick.$list.height ''
+            , 100
             
-        return
-  ])
-  
-  .directive('slickAnchor', [
-    '$timeout'
-    ($timeout) ->
-      restrict: 'A'
-      link: (scope, el, attrs) ->
-        el.on 'click', (e) ->
-          scope.$root.$broadcast 'slick:anchor', scope
-          scope.$emit 'nav:change', scope
+        $timeout setup
 
         return
   ])
@@ -167,10 +124,6 @@ angular
     name: 'registry'
     title: 'Registries'
     templateUrl: 'registry.html'
-  ,
-    name: 'contact'
-    title: 'Contact'
-    templateUrl: 'contact.html'
   ])
   
   .config([

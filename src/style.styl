@@ -3,6 +3,12 @@
 
 @import '_ease'
 
+white = #fbf9f1
+black = #1b1919
+
+mq_small = "screen and (max-width: 600px)"
+mq_beyond = "screen and (min-width: 1200px)"
+
 html
   box-sizing border-box
   font-size 62.5%
@@ -18,76 +24,115 @@ html
     box-sizing inherit
     
 a
+  color inherit
   cursor pointer
 
+i[class^='icon-']
+  font-size 12.8rem
+
 .cover
-  transition(opacity 500ms $easeInOutCubic)  
+  transition opacity 600ms $easeInOutCubic, visibility 600ms $easeInOutCubic
   background-color black
-  height 100%
+  height 1000%
   position absolute
   top 0
   width 100%
-    
+  
+.svg
+  background-position center center
+  background-repeat no-repeat
+  background-size cover
+  height 100px
+  width 200px
+
 body
   Playfair()
+  background-color white
+  color $black
   font-size 1.0em
-  
-  > header
-    font-size 3.6rem
-    height 30.0rem
-    position absolute
-    text-align center
-    width 100%
-    z-index 1
-    
-    a
-      display block
-        
-      h1
-        Oswald()
-
-      &.active
-        cursor auto
-        h1
-          font-weight 700      
+  overflow-y scroll
 
   > main  
-    font-size 1.8rem
-    
-    
+    font-size 1.6rem
+   
     .page
       min-height 100vh
-      padding 30.0rem 0 0
       position relative
                 
       .content
-
-        padding 0 2.0rem
+        padding 4.0rem
         
 	      header
-          border-bottom 3px solid black
-          margin-bottom 1px
-           
-        main
-          vendor('column-count', 3)
-          vendor('column-rule', 1px solid black)
-          vendor('column-gap', 2.0rem)
+          margin-bottom .1rem
           
-          border-top 1px solid black
+          h1
+            Oswald(6.4rem)
+            word-spacing 2.0rem
+            
+        .divider
+          border-top .1rem solid black
+          border-bottom .1rem solid black
+          padding .1rem 0
+          
+          .inner
+            Playfair(1.6rem, 700, true)
+            border-top .1rem solid black
+            border-bottom .3rem solid black
+            line-height 2
+            text-align center
+            text-transform uppercase
+            word-spacing .5rem
+           
+        main          
+          vendor 'column-count', 2
+          vendor 'column-gap', 1.5rem
+          vendor 'column-rule', .1rem solid black
           
           article
-            h2
-              Dosis()
-          
-          
-          
+            h2, h3
+              Dosis(3.2rem, 700)
+              
+              &:after
+                background-color black
+                border-bottom .1rem solid black
+                content ''
+                display block
+                height 0
+                margin 0 auto
+                margin-top 1.0rem
+                position relative
+                width 50%
+                
+            h3
+              Playfair(2.4rem, 700, false)
+              
+            p
+              vendor 'word-break', break-all
+              vendor 'hyphens', auto
+              
+              line-height 1.5
+              text-align justify
+              text-indent 4.0rem
+              word-break break-word
+              
+          .span-all
+            vendor 'column-span', all
+              
+          @media mq_small
+            vendor 'column-count', 1
+            
+          @media mq_beyond
+            vendor 'column-count', 3
+              
 
-          
+     
       &.slick-slide
         .cover
           opacity .05
+          visibility visible
       
       &.slick-center
         .cover
           opacity 0
-      
+          visibility hidden
+          

@@ -1,19 +1,7 @@
 <body ng-controller="body">
   
-  <header ng-include="'header.html'" ></header>
-  <main   ng-include="'main.html'" slick pages="pages"></main>
+  <main ng-include="'main.html'" slick pages="pages"></main>
   
-  <script type="text/ng-template" id="header.html">
-    <a ng-repeat="page in nav_pages | limitTo : 3"
-      ng-class="{
-        active: ($index === 1)
-      }"
-      slick-anchor
-    >
-      <h1 ng-bind-html="page.title"></h1>
-    </a>
-  </script>
-
   <script type="text/ng-template" id="main.html">
     <section ng-repeat="page in pages" class="page">
       <div class="content" ng-include src="page.templateUrl"></div>
@@ -21,18 +9,30 @@
     </section>
   </script>
   
+  <script type="text/ng-template" id="divider.html">
+    <div class="inner">
+      Seattle, Washington, Friday, October 21, 2016.
+    </div>
+  </script>
+  
   <script type="text/ng-template" id="home.html">
   
-    <header></header>
+    <header>
+      <h1>Froning and Mulloy</h1>
+      <h1>Merger Immenent</h1>
+    </header>
+    
+    <div ng-include="'divider.html'" class="divider"></div>
     
     <main>
       <article>
         <h2>Aenean ultricies mi vitae est.</h2>
         <p><a href="#">Pellentesque</a> habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+        <p><a href="#">Pellentesque</a> habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
       </article>
       
       <article>
-        <h2>Praesent dapibus, neque id cursus faucibus</h2>
+        <h3>Praesent dapibus, neque id cursus faucibus</h3>
         <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
       </article>
       
@@ -51,7 +51,12 @@
   
   <script type="text/ng-template" id="visitors.html">
   
-    <header></header>
+    <header>
+      <h1>Visit Seattle</h1>
+      <h1>Washington</h1>
+    </header>
+    
+    <div ng-include="'divider.html'" class="divider"></div>
     
     <main>
       <article>
@@ -64,7 +69,12 @@
   
   <script type="text/ng-template" id="registry.html">
   
-    <header></header>
+    <header>
+      <h1>Wedding</h1>
+      <h1>Registry</h1>
+    </header>
+    
+    <div ng-include="'divider.html'" class="divider"></div>
     
     <main>
       <article>
@@ -73,19 +83,6 @@
       </article>
     </main>
   </script>
-  
-  <script type="text/ng-template" id="contact.html">
-    
-    <header></header>
-    
-    <main>
-      <article>
-        <h2>Contact</h2>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-      </article>
-    </main>
-  </script>
-  
 
   <script>@@include('script.js')</script>
   

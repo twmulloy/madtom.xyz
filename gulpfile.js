@@ -34,6 +34,7 @@ var manifest = {
   ],
   styles: [
     path.bower + '/slick-carousel/slick/slick.css',
+    path.src + '/icons.css',
     path.src + '/style.styl'
   ],
   htmls: [
@@ -44,7 +45,7 @@ var manifest = {
 
 gulp.task('connect', function () {
   connect.server({
-    root: path.dist,
+    root: [path.dist, path.src],
     livereload: true
   });
 });

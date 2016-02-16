@@ -1,11 +1,13 @@
 // Knockout
-Oswald(size = 100%, weight = 400, upcase = true)
+Oswald(size = 100%, weight = 700, upcase = true)
   font-family 'Oswald', sans-serif
   font-weight weight
   font-size size
   if upcase
     text-transform uppercase
-
+  else
+    text-transform none
+    
 // Atrament 
 Dosis(size = 100%, weight = 500, upcase = true)
   font-family 'Dosis', sans-serif
@@ -13,7 +15,9 @@ Dosis(size = 100%, weight = 500, upcase = true)
   font-size size
   if upcase
     text-transform uppercase
-    
+  else
+    text-transform none
+        
 // Harriet
 Playfair(size = 100%, weight = 400, upcase = false)
   font-family 'Playfair Display', serif
@@ -21,3 +25,5 @@ Playfair(size = 100%, weight = 400, upcase = false)
   font-size size
   if upcase
     text-transform uppercase
+  else
+    text-transform none
