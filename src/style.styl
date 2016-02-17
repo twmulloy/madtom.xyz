@@ -6,8 +6,9 @@
 white = #fbf9f1
 black = #1b1919
 
-mq_small = "screen and (max-width: 600px)"
-mq_beyond = "screen and (min-width: 1200px)"
+mq_mobile = "screen and (max-width: 720px)"
+mq_tablet = "screen and (min-width: 720px) and (max-width: 1080px)"
+mq_beyond = "screen and (min-width: 1920px)"
 
 html
   box-sizing border-box
@@ -27,16 +28,21 @@ a
   color inherit
   cursor pointer
 
+audio,
+canvas,
+iframe,
+img,
+svg,
+video
+  vertical-align middle
+
 .cover
-  transition opacity 250ms $easeInOutCubic, visibility 250ms $easeInOutCubic
+  transition opacity 500ms $easeInOutCubic, visibility 500ms $easeInOutCubic
   background-color black
-  height 1000%
+  height 500%
   position absolute
   top 0
   width 100%
-  
-.span-all
-  vendor 'column-span', all
 
 body
   Playfair()
@@ -65,12 +71,13 @@ body
         padding 4.0rem
         
 	      header
-          margin-bottom 1.0rem
+          margin 1.0rem 0
           text-align justify
           
           h1
             Oswald 6.4rem
-            word-spacing 2.0rem
+            .slabtext
+              margin 1.0rem 0
             
         .divider
           border-top .1rem solid black
@@ -86,59 +93,50 @@ body
             text-transform uppercase
             word-spacing .5rem
            
-        main          
-          vendor 'column-count', 2
-          vendor 'column-gap', 1.5rem
-          vendor 'column-rule', .1rem solid black
+        main
+          vendor 'column-count', 3
+          vendor 'column-gap', 2.0rem          
+          margin 1.0rem 0
+
+          @media mq_mobile
+            vendor 'column-count', 1
+            
+          @media mq_tablet
+            vendor 'column-count', 2
+            
+          @media mq_beyond
+            vendor 'column-count', 4
           
           article
+            margin 1.0rem 0
+            
+            &:first-child
+              margin-top 0
+            
+            *:first-child
+              margin 1.0rem 0
+            
             h2
-              Dosis 3.2rem, 700
-              line 25%  
+              Dosis 3.2rem
+              
             h3
               Playfair 2.4rem, 700, false
-              line 25%
-            p
-              vendor 'word-break', break-all
-              vendor 'hyphens', auto
-              
+
+            p    
               line-height 1.5
               text-align justify
               text-indent 2.0rem
-              word-break break-word
-              
-            *:last-child
-              margin-bottom .5rem
-              
-          @media mq_small
-            vendor 'column-count', 1
-            
-          @media mq_beyond
-            vendor 'column-count', 3
-              
 
-     
-      &.slick-slide
+      &.slick-slide        
         .cover
           cursor pointer
-          opacity .03
+          opacity .05
           visibility visible
-          
           &:hover
-            transition opacity 250ms $easeInOutCubic
-            opacity 0
-            
-      
-      &.slick-center
-        transition box-shadow 250ms $easeInOutCubic 500ms
+            opacity .025
 
-        background-color white
-        box-shadow 0 0 .3rem rgba(27, 25, 25, .1)
-        z-index 1
-        
+      &.slick-center
         .cover
           opacity 0
           visibility hidden
-          
-
-      
+         

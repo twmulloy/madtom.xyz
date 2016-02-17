@@ -16,13 +16,16 @@ transition()
 	vendor('transition', arguments)
   
   
-line(width = 50%)
+line(width = 50%, bottom = -1.0rem)
+  position relative
   &:after
     background-color black
-    border-bottom .1rem solid black
+    bottom bottom
     content ''
     display block
-    height 0
+    height .1rem
+    left 50%
     margin 0 auto
-    position relative
+    margin-left -(width/2)
+    position absolute
     width width

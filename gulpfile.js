@@ -34,6 +34,7 @@ var manifest = {
     path.src + '/script.coffee'
   ],
   styles: [
+    path.src + '/normalize.css',
     path.bower + '/slick-carousel/slick/slick.css',
     path.bower + '/slabText/css/slabtext.css',
     path.src + '/icons.css',

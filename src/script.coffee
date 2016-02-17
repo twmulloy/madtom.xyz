@@ -11,8 +11,10 @@ WebFont.load
   active: ->
   
     $('h1', '#main .page .content > header').slabText
-      fontRatio: 0.5
+      fontRatio: 0.25
       maxFontSize: 128
+      minCharsPerLine: 6
+      resizeThrottleTime: 50
       
     $(window).trigger 'resize'
 
@@ -58,7 +60,7 @@ angular
       restrict: 'A'
       scope:
         pages: '='
-      link: (scope, el, attrs, ctrl) ->
+      link: (scope, el, attrs) ->
       
         delay = do ->
           timer = 0
@@ -97,7 +99,9 @@ angular
             cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)' # $easeInOutCubic
             adaptiveHeight: true
             mobileFirst: true
+            # variableWidth: false
             
+              
           el.on 'click', (e) ->
             element = e.target
             if element.className is 'cover'
