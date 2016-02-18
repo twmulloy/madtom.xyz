@@ -43,7 +43,25 @@ video
   position absolute
   top 0
   width 100%
+  
+.map
+  padding-bottom 100%
+  width 100%
+  
+.map-container
+  transition opacity 100ms $easeInOutCubic 100ms
+  opacity 1
+  
+.slabtext
+  transition opacity 100ms $easeInOutCubic 100ms
+  opacity 1
 
+body
+  &.resize
+    .slabtext,
+    .map-container
+      opacity 0
+  
 body
   Playfair()
   background-color white
@@ -88,14 +106,15 @@ body
             Playfair 1.6rem, 700, true
             border-top .1rem solid black
             border-bottom .3rem solid black
-            line-height 2
+            padding: 1.0rem 0
             text-align center
             text-transform uppercase
             word-spacing .5rem
            
         main
           vendor 'column-count', 3
-          vendor 'column-gap', 2.0rem          
+          vendor 'column-gap', 2.0rem    
+           
           margin 1.0rem 0
 
           @media mq_mobile
@@ -107,25 +126,23 @@ body
           @media mq_beyond
             vendor 'column-count', 4
           
-          article
+          > article
             margin 1.0rem 0
             
-            &:first-child
-              margin-top 0
-            
-            *:first-child
+            > *:first-child
               margin 1.0rem 0
             
-            h2
+            > h2
               Dosis 3.2rem
               
-            h3
+            > h3
               Playfair 2.4rem, 700, false
 
-            p    
+            > p    
               line-height 1.5
               text-align justify
               text-indent 2.0rem
+          
 
       &.slick-slide        
         .cover
@@ -139,4 +156,3 @@ body
         .cover
           opacity 0
           visibility hidden
-         
