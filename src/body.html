@@ -1,6 +1,8 @@
 <body ng-controller="body">
   <main ng-include="'main.html'" id="main" slick pages="pages"></main>
-  
+  <a class="page-back">{{ pages | page : 'simple' : 'back' }}</a>
+  <a class="page-next">{{ pages | page : 'simple' }}</a>
+ 
   <script type="text/ng-template" id="main.html">
     <section ng-repeat="page in pages" class="page">
       <div class="content" ng-include src="page.templateUrl"></div>
@@ -24,40 +26,50 @@
     <div ng-include="'divider.html'" class="divider"></div>
     
     <main>
-      
       <article>
-        <h2>Seattle tourism on the rise</h2>
-        <p>Millions of visitors flock to Seattle year round to enjoy all the Emerald City has to offer.  The food is fresh, the amount of rain is highly exaggerated and the beer flows like wine.  While there are no shortages of places to stay in the city, we’ve listed out a few below that we recommend to family and friends.</p>
-      </article>
-
-      <article>
-        <h2>Recommended Hotels and Accommodations</h2>
-        <p>Ut elementum ipsum et laoreet vulputate. Morbi ac finibus risus. Aliquam fringilla cursus lobortis. Sed sit amet justo in mauris laoreet molestie. Morbi gravida, turpis vitae molestie cursus, dui massa eleifend nibh, sit amet interdum dui augue quis orci. Phasellus tempus eros neque, sed facilisis erat hendrerit eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet sapien non est volutpat pellentesque. Fusce ullamcorper, risus id rutrum suscipit, justo libero aliquet ligula, eget iaculis ipsum libero id nunc. Aenean nec augue ultricies, elementum ipsum a, vulputate mi. In felis massa, ullamcorper vel erat laoreet, porta posuere risus. Suspendisse vehicula vitae velit nec efficitur.</p>
-        
+        <header>
+          <h2>About Timmy and Magdeline</h2>
+          <hr class="p30" />
+        </header>
+        <p>TUCSON, Ariz. &mdash; What started as a chance encounter at a speakeasy in Tucson, Arizona is turning into a lifetime partnership for Mr. Thomas Mulloy, of Tacoma, Washington and Ms. Madeline Froning, of Tulsa, Oklahoma.  The couple began their courtship while the bride to be was living in the Caribbean and the future groom was residing in Chicago’s Windy City.  They have since relocated to the Pacific Northwest where they hope to welcome friends and family for a Fall wedding in the Emerald City.</p>
+        <hr class="p50" />
       </article>
       
-      <article class="map" id="venue"></article>
+      <article class="box">
+        <header>
+          <h2>Lorem ipsum dolor sit amet</h2>
+          <hr class="p30" />
+        </header>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id ultricies lacus, sed sollicitudin risus. Nulla vel molestie sapien. Duis lacinia volutpat libero, dapibus rhoncus nisl scelerisque id. Cras mattis vehicula lorem, nec tincidunt risus vestibulum sed. Etiam ornare condimentum ipsum, nec interdum magna venenatis vel.</p>
+        <hr class="p50" />
+      </article>
+
+      <article class="span">
+        <header>
+          <h3>Retired WA State Ferry New Life As <q>Seattle&apos;s Premier Waterfront Venue</q></h3>
+          <hr class="p30" />
+        </header>
+        <p>NORTH LAKE UNION, Seattle, Wash., Friday, October 21 &mdash; The Longtime Washington State Ferry MV Skansonia will be retired from service and permanently docked in Lake Union later this year. The new owners state that they hope to restore it to its original grandeur and use it as a space to celebrations for high society.</p>
+        <div class="map" id="venue"></div>
+      </article>
 
       <article>
-        <h3>Hyatt Olive 8</h3>
-        <p>Located downtown at Olive Way and 8th Avenue, this hotel puts you in walking distance to Pike Market, the Pier, Seattle Center, tons of great shopping and incredible restaurants.  It is also about a 10 minute uber ride from our wedding venue.</p>
-        <p>We have reserved a room block at this hotel and will be staying there ourselves before and after the wedding.</p>
-        <em>Insert room block info (getting from hotel)</em>
+        <header>
+          <h2>Lorem ipsum dolor sit amet</h2>
+          <hr class="p30" />
+        </header>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id ultricies lacus, sed sollicitudin risus. Nulla vel molestie sapien. Duis lacinia volutpat libero, dapibus rhoncus nisl scelerisque id. Cras mattis vehicula lorem, nec tincidunt risus vestibulum sed. Etiam ornare condimentum ipsum, nec interdum magna venenatis vel.</p>
+        <img src="images/skansonia_01.jpg" />
       </article>
       
       <article>
-        <h3>AirBNB</h3>  
-        <p>There are a lot of affordable homes and apartments available on AirBNB.  We recommend looking for rentals in the following neighborhoods, both for their proximity to the venue and their local charm:  Fremont, Queen Anne, Ballard and Capitol Hill.</p>
-        <em>(insert map that shows Skanskonia and neighborhoods around it)</em>
-        <p>In reality, there are a lot of great places to stay in this city, so feel free to explore.  We would just recommend staying within a 10-15 minute ride of the venue and staying in Seattle proper as opposed to Bellevue or other surrounding cities.</p>
+        <header>
+          <h3>Consectetur adipiscing elit.</h3>
+          <hr class="p30" />
+        </header>
+        <p>In molestie commodo hendrerit. Curabitur consequat vulputate quam, pellentesque suscipit elit ultricies in. Donec porta elementum nisl in scelerisque. Pellentesque hendrerit diam at sem ullamcorper, quis vehicula velit feugiat. Suspendisse vel aliquet eros. Cras vel tincidunt nulla.</p>
+        <hr class="p50" />
       </article>
-
-      <article>
-        <h2>Good eats</h2>
-        <p>You will not have any trouble finding an overwhelming amount of great restaurant options in this city.  That being said, there are a few places we recommend to all out of town guests.</p>
-        <p><a href="http://beechershandmadecheese.com/Locations/Seattle.aspx" target="blank">Beecher’s</a> Handmade Cheese - located in the heart of Pike Place Market.  Their Mac & Cheese is life-changing.  They now have a location in the airport, so you can always grab a bowl on your way out of town.  Best to consume this after the wedding if you’re worried about fitting into your pants/dress.</p>
-      </article>
-
     </main>
     
   </script>
@@ -72,32 +84,54 @@
     
     <main>
       <article>
-        <h2>Seattle tourism on the rise</h2>
+        <header>
+          <h2>Seattle tourism on the rise</h2>
+          <hr class="p30" />
+        </header>
+        
         <p>Millions of visitors flock to Seattle year round to enjoy all the Emerald City has to offer.  The food is fresh, the amount of rain is highly exaggerated and the beer flows like wine.  While there are no shortages of places to stay in the city, we’ve listed out a few below that we recommend to family and friends.</p>
+        
+        <hr class="p50" />
+      </article>
+
+      <article>
+        <header>
+          <h2>Recommended Hotels and Accommodations</h2>
+          <hr class="p30" />
+        </header>
+        <p>Ut elementum ipsum et laoreet vulputate. Morbi ac finibus risus. Aliquam fringilla cursus lobortis. Sed sit amet justo in mauris laoreet molestie. Morbi gravida, turpis vitae molestie cursus, dui massa eleifend nibh, sit amet interdum dui augue quis orci. Phasellus tempus eros neque, sed facilisis erat hendrerit eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet sapien non est volutpat pellentesque. Fusce ullamcorper, risus id rutrum suscipit, justo libero aliquet ligula, eget iaculis ipsum libero id nunc. Aenean nec augue ultricies, elementum ipsum a, vulputate mi. In felis massa, ullamcorper vel erat laoreet, porta posuere risus. Suspendisse vehicula vitae velit nec efficitur.</p>
+        <hr class="p50" />
       </article>
       
       <article>
-        <h2>Recommended Hotels and Accommodations</h2>
-      </article>
-        
-      <article>
-        <h3>Hyatt Olive 8</h3>
+        <header>
+          <h3>Hyatt Olive 8</h3>
+          <hr class="p30" />
+        </header>
         <p>Located downtown at Olive Way and 8th Avenue, this hotel puts you in walking distance to Pike Market, the Pier, Seattle Center, tons of great shopping and incredible restaurants.  It is also about a 10 minute uber ride from our wedding venue.</p>
         <p>We have reserved a room block at this hotel and will be staying there ourselves before and after the wedding.</p>
-        <em>Insert room block info (getting from hotel)</em>
+        <hr class="p50" />
       </article>
       
       <article>
-        <h3>AirBNB</h3>  
+        <header>
+          <h3>AirBNB</h3>
+          <hr class="p30" />
+        </header>
         <p>There are a lot of affordable homes and apartments available on AirBNB.  We recommend looking for rentals in the following neighborhoods, both for their proximity to the venue and their local charm:  Fremont, Queen Anne, Ballard and Capitol Hill.</p>
         <em>(insert map that shows Skanskonia and neighborhoods around it)</em>
         <p>In reality, there are a lot of great places to stay in this city, so feel free to explore.  We would just recommend staying within a 10-15 minute ride of the venue and staying in Seattle proper as opposed to Bellevue or other surrounding cities.</p>
+        <hr class="p50" />
       </article>
-      
+
       <article>
-        <h2>Good eats</h2>
+        <header>
+          <h2>Good eats</h2>
+          <hr class="p30" />
+        </header>
         <p>You will not have any trouble finding an overwhelming amount of great restaurant options in this city.  That being said, there are a few places we recommend to all out of town guests.</p>
         <p><a href="http://beechershandmadecheese.com/Locations/Seattle.aspx" target="blank">Beecher’s</a> Handmade Cheese - located in the heart of Pike Place Market.  Their Mac & Cheese is life-changing.  They now have a location in the airport, so you can always grab a bowl on your way out of town.  Best to consume this after the wedding if you’re worried about fitting into your pants/dress.</p>
+        <hr class="p50" />
       </article>
     </main>
   </script>

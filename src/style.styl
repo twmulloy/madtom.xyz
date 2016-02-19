@@ -35,26 +35,72 @@ img,
 svg,
 video
   vertical-align middle
+  
+hr
+  border 0
+  border-bottom .1rem solid black
+  margin 0 auto
+  
+  &.p50
+    width 50%
+    
+  &.p40
+    width 40%
+  
+  &.p30
+    width 30%
+    
+h1, h2, h3, h4, h5, h6, p
+  margin 0
 
 .cover
-  transition opacity 500ms $easeInOutCubic, visibility 500ms $easeInOutCubic
   background-color black
-  height 500%
+  height 200%
   position absolute
   top 0
   width 100%
   
 .map
-  padding-bottom 100%
+  padding-bottom 100% // 1:1 Aspect ratio
   width 100%
   
+  // Cleanup map
+  .gm-style
+    .gm-style-cc,
+    .gmnoscreen,
+    .gmnoprint,
+    > *:last-child
+      display none
+  
 .map-container
-  transition opacity 100ms $easeInOutCubic 100ms
-  opacity 1
+  border .2rem solid black
   
 .slabtext
-  transition opacity 100ms $easeInOutCubic 100ms
   opacity 1
+  
+.page-back,
+.page-next
+  Oswald 1.2rem
+  display block
+  pointer-events none
+  position fixed
+  text-align center
+  top 0
+  white-space nowrap
+  width 100vh
+  
+.page-back
+  transform rotate(90deg)
+  vendor 'transform-origin', 0 0 0
+  left 7.5vw
+  margin-left -.6rem
+
+.page-next
+  transform rotate(-90deg)
+  vendor 'transform-origin', 100% 0 0
+  right 7.5vw
+  margin-right -.6rem
+  
 
 body
   &.resize
@@ -68,6 +114,7 @@ body
   color $black
   font-size 1.0em
   overflow-y scroll
+  position relative
 
   > main  
     font-size 1.6rem
@@ -90,12 +137,13 @@ body
         
 	      header
           margin 1.0rem 0
-          text-align justify
-          
+
           h1
             Oswald 6.4rem
+            text-align justify
+            
             .slabtext
-              margin 1.0rem 0
+              margin 2.0rem 0
             
         .divider
           border-top .1rem solid black
@@ -106,16 +154,15 @@ body
             Playfair 1.6rem, 700, true
             border-top .1rem solid black
             border-bottom .3rem solid black
-            padding: 1.0rem 0
+            padding: .5rem 0
             text-align center
             text-transform uppercase
             word-spacing .5rem
-           
+            
         main
           vendor 'column-count', 3
           vendor 'column-gap', 2.0rem    
-           
-          margin 1.0rem 0
+          vendor 'column-rule', .1rem solid black 
 
           @media mq_mobile
             vendor 'column-count', 1
@@ -125,34 +172,51 @@ body
             
           @media mq_beyond
             vendor 'column-count', 4
-          
+            
           > article
-            margin 1.0rem 0
-            
-            > *:first-child
-              margin 1.0rem 0
-            
-            > h2
-              Dosis 3.2rem
-              
-            > h3
-              Playfair 2.4rem, 700, false
+            display inline-block // Prevent article split
+            padding 1.0rem 0 0
 
-            > p    
-              line-height 1.5
+            > header
+              margin 0
+              margin-bottom 1.0rem
+              h2
+                Dosis 2.7rem
+                line-height 1.0
+                margin-bottom 1.0rem
+                padding-top .1rem
+              h3
+                Playfair 2.4rem, 700, false
+                line-height 1.0
+                margin-bottom 1.0rem
+            
+            > p,
+            > em    
+              line-height 1.4
               text-align justify
               text-indent 2.0rem
-          
+              
+              &:last-of-type
+                padding 0 0 1.0rem
+                
+            > img
+              border .2rem solid black
+              width 100%
+              
+            &.box
+              border .3 solid black
+            
 
       &.slick-slide        
         .cover
+          transition visibility 500ms $easeInOutCubic, background-color 500ms $easeInOutCubic
+          background-color rgba(27, 25, 25, .04)
           cursor pointer
-          opacity .05
           visibility visible
           &:hover
-            opacity .025
+            background-color rgba(27, 25, 25, .02)
 
       &.slick-center
         .cover
-          opacity 0
+          background-color rgba(27, 25, 25, 0)
           visibility hidden
