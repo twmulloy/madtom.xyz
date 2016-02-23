@@ -1,8 +1,12 @@
-<body ng-controller="body">
+<body ng-controller="body" ng-cloak>
+  
+  <nav>
+    <a class="page-back">{{ page_back }}</a>
+    <a class="page-next">{{ page_next }}</a>
+  </nav>
+  
   <main ng-include="'main.html'" id="main" slick pages="pages"></main>
-  <a class="page-back">{{ pages | page : 'simple' : 'back' }}</a>
-  <a class="page-next">{{ pages | page : 'simple' }}</a>
- 
+  
   <script type="text/ng-template" id="main.html">
     <section ng-repeat="page in pages" class="page">
       <div class="content" ng-include src="page.templateUrl"></div>

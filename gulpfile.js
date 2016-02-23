@@ -64,7 +64,7 @@ gulp.task('html', ['assets'], function () {
       collapseWhitespace: true,
       minifyJS: true,
       minifyCSS: true,
-      processScripts: ['text/ng-template'] 
+      processScripts: ['text/ng-template']
     }))
     .pipe(concat('index.html'))
     .pipe(gulp.dest(path.dist))
@@ -82,7 +82,9 @@ gulp.task('build', ['clean', 'html']);
 gulp.task('style', function () {
   return gulp.src(manifest.styles)
     .pipe(gulpif(/[.]styl$/, dsl.stylus()))
-    .pipe(min.style({}))
+    .pipe(min.style({
+      safe: true
+    }))
     .pipe(concat('style.css'))
     .pipe(gulp.dest(path.dist));
 });

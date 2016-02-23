@@ -11,9 +11,8 @@ WebFont.load
   
     $('h1', '#main .page .content > header').slabText
       fontRatio: 0.25
-      maxFontSize: 128
       minCharsPerLine: 6
-      resizeThrottleTime: 50
+      resizeThrottleTime: 250
       
     $(window).trigger 'resize'
 
@@ -164,6 +163,11 @@ angular
     ($scope, $filter, pages) ->
       $scope.pages = pages
       
+      $scope.$watch 'pages', (current, previous) ->
+        $scope.page_back = $filter('page') $scope.pages, 'simple', 'back'
+        $scope.page_next = $filter('page') $scope.pages, 'simple'
+      , true    
+        
       return
   ])
   
@@ -184,35 +188,36 @@ angular
           
           # Slick methods
           after = (e, slick, current) ->
-            scope.pages[slick.currentSlide].current = true 
-            do scope.$apply
+            document.body.classList.remove 'slide'
             $current = $(slick.$slides[current])
             $current.siblings().height do $current.height
+            scope.pages[slick.currentSlide].current = true 
+            do scope.$applyAsync
 
           $el.on 'init', (e, slick) ->
             after e, slick, slick.currentSlide
             
           $el.on 'beforeChange', (e, slick, current, next) ->
-            scope.pages[slick.currentSlide].current = false
-            do scope.$apply
+            document.body.classList.add 'slide'
             slick.$slides.height ''
+            scope.pages[slick.currentSlide].current = false
      
           $el.on 'afterChange', after
           
           # $el.on 'swipe', (e, slick, direction) ->
           
           mousemove = (e) ->
-            console.log e.pageX
+            document.body.classList.add 'drag'
           
           mousedown = (e) ->
-            $(@).one('mouseup', mouseup).on('mousemove', mousemove)
+            $(@).one('mouseup mouseleave', mouseup).on('mousemove', mousemove)
 
           mouseup = (e) ->
             $(@).off 'mousemove'
-            
+            document.body.classList.remove 'drag'
+
           $el.on 'mousedown', mousedown
-            
-          
+                      
           $el.slick
             centerMode: true
             centerPadding: '7.5vw'
@@ -224,7 +229,6 @@ angular
             cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)' # $easeInOutCubic
             adaptiveHeight: true
             mobileFirst: true
-            # variableWidth: false  
             touchThreshold: 3
               
           el.on 'click', (e) ->
@@ -236,6 +240,23 @@ angular
                 $el.slick 'slickNext'
               else if e.clientX < current_w
                 $el.slick 'slickPrev'
+                
+          el.on 'mouseover', (e) ->
+            element = e.target
+            if element.className is 'cover'
+              slick = $el.slick 'getSlick'
+              current_w = slick.$slides[slick.currentSlide].offsetWidth
+              if e.clientX > current_w
+                document.body.classList.add 'hover-next'
+              else if e.clientX < current_w
+                document.body.classList.add 'hover-back'
+                
+          el.on 'mouseout', (e) ->
+            element = e.target
+            if element.className is 'cover'
+              document.body.classList.remove 'hover-next'
+              document.body.classList.remove 'hover-back'
+            
   
         $timeout setup
 
@@ -341,9 +362,6 @@ $(window).on 'resize', (e) ->
     # Fix for dynamic height
     slick = $('[slick]').slick 'getSlick'
     slick.$list.height ''
-
     do gmaps
-    
     document.body.classList.remove 'resize'
-    
-  , 100
+  , 500

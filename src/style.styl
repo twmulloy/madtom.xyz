@@ -10,9 +10,19 @@ mq_mobile = "screen and (max-width: 720px)"
 mq_tablet = "screen and (min-width: 720px) and (max-width: 1080px)"
 mq_beyond = "screen and (min-width: 1920px)"
 
+[ng\:cloak], 
+[ng-cloak], 
+[data-ng-cloak], 
+[x-ng-cloak], 
+.ng-cloak, 
+.x-ng-cloak
+  display none !important
+
 html
   box-sizing border-box
   font-size 62.5%
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
 
 * 
   box-sizing inherit
@@ -81,53 +91,94 @@ h1, h2, h3, h4, h5, h6, p
 .page-back,
 .page-next
   Oswald 1.2rem
+  vendor 'backface-visibility', hidden
+  transform translate3d(0,0,0)
   display block
-  pointer-events none
-  position fixed
+  opacity .8
+  position absolute
   text-align center
   top 0
   white-space nowrap
   width 100vh
-  
+
 .page-back
   transform rotate(90deg)
+  transition left 250ms $easeInOutCubic 500ms, 
+    opacity 250ms linear 500ms,
+    margin 500ms $easeInOutCubic
   vendor 'transform-origin', 0 0 0
   left 7.5vw
   margin-left -.6rem
 
 .page-next
   transform rotate(-90deg)
+  transition right 250ms $easeInOutCubic 500ms, 
+    opacity 250ms linear 500ms,
+    margin 500ms $easeInOutCubic
   vendor 'transform-origin', 100% 0 0
   right 7.5vw
   margin-right -.6rem
   
-
 body
+  &.drag,
+  &.slide,
+  &.resize    
+    .page-back
+      transition left 250ms $easeInOutCubic, 
+        opacity 250ms linear
+      left 5.5vw
+    .page-next
+      transition right 250ms $easeInOutCubic, 
+        opacity 250ms linear
+      right 5.5vw
+    .page-back,
+    .page-next
+      opacity 0
+
   &.resize
     .slabtext,
     .map-container
       opacity 0
-  
+      
+  &.hover-next
+    .page-next
+      margin-right 0
+  &.hover-back
+    .page-back
+      margin-left 0
+
 body
   Playfair()
   background-color white
-  color $black
+  color black
   font-size 1.0em
   overflow-y scroll
   position relative
+  
+  > nav
+    vendor 'background-blend-mode', multiply
+    background-color rgba(255,255,255,0.15)
+    display block
+    height 100%
+    left 0
+    overflow hidden
+    pointer-events none
+    position fixed
+    top 0
+    width 100%
+    z-index 1
 
   > main  
     font-size 1.6rem
     
     .slick-list
-
       &.draggable
         cursor -webkit-grab
         cursor grab
         &:active
           cursor -webkit-grabbing
           cursor grabbing
-
+          
     .page
       min-height 100vh
       position relative
@@ -207,14 +258,15 @@ body
               border .3 solid black
             
 
-      &.slick-slide        
+      &.slick-slide    
         .cover
-          transition visibility 500ms $easeInOutCubic, background-color 500ms $easeInOutCubic
+          transition visibility 500ms $easeInOutCubic, 
+            background-color 500ms $easeInOutCubic
           background-color rgba(27, 25, 25, .04)
           cursor pointer
           visibility visible
           &:hover
-            background-color rgba(27, 25, 25, .02)
+            background-color rgba(27, 25, 25, 0)
 
       &.slick-center
         .cover
