@@ -11,7 +11,7 @@ WebFont.load
   
     $('h1', '#main .page .content > header').slabText
       fontRatio: 0.25
-      minCharsPerLine: 6
+      minCharsPerLine: 8
       resizeThrottleTime: 250
       
     $(window).trigger 'resize'
@@ -210,13 +210,13 @@ angular
             document.body.classList.add 'drag'
           
           mousedown = (e) ->
-            $(@).one('mouseup mouseleave', mouseup).on('mousemove', mousemove)
+            $(@).one('mouseup mouseleave touchend touchcancel', mouseup).on('mousemove touchmove', mousemove)
 
           mouseup = (e) ->
-            $(@).off 'mousemove'
+            $(@).off 'mousemove touchmove'
             document.body.classList.remove 'drag'
 
-          $el.on 'mousedown', mousedown
+          $el.on 'mousedown touchstart', mousedown
                       
           $el.slick
             centerMode: true
@@ -231,7 +231,7 @@ angular
             mobileFirst: true
             touchThreshold: 3
               
-          el.on 'click', (e) ->
+          el.on 'click touchstart', (e) ->
             element = e.target
             if element.className is 'cover'
               slick = $el.slick 'getSlick'
@@ -241,7 +241,10 @@ angular
               else if e.clientX < current_w
                 $el.slick 'slickPrev'
                 
-          el.on 'mouseover', (e) ->
+              document.body.classList.remove 'hover-next'
+              document.body.classList.remove 'hover-back'
+                
+          el.on 'mouseenter', (e) ->
             element = e.target
             if element.className is 'cover'
               slick = $el.slick 'getSlick'
@@ -251,7 +254,7 @@ angular
               else if e.clientX < current_w
                 document.body.classList.add 'hover-back'
                 
-          el.on 'mouseout', (e) ->
+          el.on 'mouseleave', (e) ->  
             element = e.target
             if element.className is 'cover'
               document.body.classList.remove 'hover-next'
@@ -353,7 +356,13 @@ gmaps = ->
     gmap.setCenter center
     
 
+w = do $(window).width
 $(window).on 'resize', (e) -> 
+  
+  # Fix for resize trigger mobile scroll
+  width = do $(@).width
+  return if width is w
+  w = width
 
   document.body.classList.add 'resize'
   
