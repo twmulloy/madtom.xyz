@@ -244,7 +244,7 @@ angular
               document.body.classList.remove 'hover-next'
               document.body.classList.remove 'hover-back'
                 
-          el.on 'mouseenter', (e) ->
+          el.on 'mouseover', (e) ->
             element = e.target
             if element.className is 'cover'
               slick = $el.slick 'getSlick'
@@ -254,7 +254,7 @@ angular
               else if e.clientX < current_w
                 document.body.classList.add 'hover-back'
                 
-          el.on 'mouseleave', (e) ->  
+          el.on 'mouseout', (e) ->  
             element = e.target
             if element.className is 'cover'
               document.body.classList.remove 'hover-next'

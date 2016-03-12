@@ -21,8 +21,6 @@ mq_beyond = "screen and (min-width: 1920px)"
 html
   box-sizing border-box
   font-size 62.5%
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
   
   @media mq_mobile
     font-size 60%
@@ -161,8 +159,8 @@ body
   position relative
   
   > nav
-    vendor 'background-blend-mode', multiply
-    background-color rgba(255,255,255,0.15)
+    // vendor 'background-blend-mode', multiply
+    background-color rgba(255,255,255,0.1)
     display block
     height 100%
     left 0
@@ -241,12 +239,12 @@ body
               margin 0
               margin-bottom 1.0rem
               h2
-                Dosis 2.7rem
+                Dosis 3.2rem
                 line-height 1.0
                 margin-bottom 1.0rem
                 padding-top .1rem
               h3
-                Playfair 2.4rem, 700, false
+                Playfair 2.8rem, 700, false
                 line-height 1.0
                 margin-bottom 1.0rem
             
