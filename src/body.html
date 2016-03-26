@@ -1,18 +1,16 @@
 <body ng-controller="body" ng-cloak>
 
-  <nav>
+  <nav ng-cloak>
     <a class="page-back">{{ page_back }}</a>
     <a class="page-next">{{ page_next }}</a>
   </nav>
 
-  <main ng-include="'main.html'" id="main" slick pages="pages"></main>
+  <main ng-include="'main.html'" id="main" slick pages="pages" ng-cloak></main>
 
   <script type="text/ng-template" id="main.html">
     <section ng-repeat="page in pages" class="page">
       <div class="content" ng-include src="page.templateUrl"></div>
-      <footer>
-        &copy; 2016 Shoppu LLC
-      </footer>
+      <footer></footer>
       <div class="cover"></div>
     </section>
   </script>
@@ -33,6 +31,36 @@
     <div ng-include="'divider.html'" class="divider"></div>
 
     <main>
+
+      <article class="box">
+        <div class="wrap">
+          <h1>Wedding:</h1>
+          <p>Mr. &amp; Mrs. Don Froning request the pleasure of your company at the marriage of their daughter</p>
+          <p>
+            Madeline Rose Froning
+            <br/> to
+            <br/> Thomas Wailani Mulloy
+          </p>
+          <p>
+            Friday, October 21, 2016
+            <br/> <span>All Aboard......5:00 P.M.
+            <br/> Ceremony........5:30 P.M.
+            <br/> Reception to Follow
+            <br/> Adults Only
+          </p>
+          <p>
+            MV Skansonia
+            <br/> 205 NE Northlake Way
+            <br/>
+            <q>A</q> Dock
+            <br/> Seattle, WA 98105
+            <br/>
+            <a href="http://www.skansonia.com" target="_blank">www.skansonia.com</a>
+          </p>
+        </div>
+        <div class="map" id="venue"></div>
+      </article>
+
       <article>
         <header>
           <h2>Mulloy&ndash;Froning Merger</h2>
@@ -50,14 +78,13 @@
 
       <article>
         <figure>
-          <img src="http://placehold.it/640x480" />
+          <img src="/images/placeholder.png" />
           <figcaption>
             <p>In molestie commodo hendrerit. Curabitur consequat vulputate quam, pellentesque suscipit elit ultricies in. Donec
               porta elementum nisl in scelerisque. Pellentesque hendrerit diam at sem ullamcorper, quis vehicula velit feugiat.
               Suspendisse vel aliquet eros. Cras vel tincidunt nulla.</p>
           </figcaption>
         </figure>
-
 
         <hr class="p50" />
       </article>
@@ -103,33 +130,6 @@
           of all sizes.</p>
 
         <hr class="p50" />
-      </article>
-
-      <article class="box">
-        <h1>Wedding</h1>
-        <p>Mr. &amp; Mrs. Don Froning request the pleasure of your company at the marriage of their daughter</p>
-        <p>
-          Madeline Rose Froning
-          <br/> to
-          <br/> Thomas Wailani Mulloy
-        </p>
-        <p>
-          Friday, October 21, 2016
-          <br/> <span>All Aboard......5:00 P.M.
-          <br/> Ceremony........5:30 P.M.
-          <br/> Reception to Follow
-          <br/> Adults Only
-        </p>
-        <p>
-          MV Skansonia
-          <br/> 205 NE Northlake Way
-          <br/>
-          <q>A</q> Dock
-          <br/> Seattle, WA 98105
-          <br/>
-          <a href="http://www.skansonia.com" target="_blank">www.skansonia.com</a>
-        </p>
-        <div class="map" id="venue"></div>
       </article>
 
     </main>

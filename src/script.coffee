@@ -1,3 +1,78 @@
+# Intial load flag
+loaded = false
+
+# Delay helper
+delay = do ->
+  timer = 0
+  (callback, ms=0) ->
+    clearTimeout timer
+    timer = setTimeout callback, ms
+    return
+    
+gmaps = ->
+  # Google Maps
+  # Fix for map not rendering in n > 1 column (Chrome)
+  for prop of @maps
+    return unless @maps.hasOwnProperty prop
+    map = @maps[prop]
+    el = map.el
+    gmap = map.gmap
+    clone = document.getElementById "#{el.id}-clone"
+    unless clone
+      clone = el.cloneNode false
+      clone.id += '-clone'
+      clone.classList.add 'map-clone'
+      clone.style.display = 'block'
+      el.parentNode.insertBefore clone, el
+    style = window.getComputedStyle clone
+    rect = do clone.getBoundingClientRect
+    o_left = clone.parentNode.parentNode.parentNode.getBoundingClientRect().left
+    o_top = window.pageYOffset - parseInt(style.marginTop, 10)
+    container = document.getElementById "#{el.id}-container"
+    unless container
+      container = document.createElement el.tagName
+      container.id = "#{el.id}-container"
+      container.classList.add 'map-container'
+      container.style.position = 'absolute'
+      container.style.overflow = 'hidden'
+      el.style.margin = 0
+      el.style.padding = 0
+      el.style.width = '100%'
+      el.style.height = '100%'
+      el.parentNode.insertBefore container, el
+      container.appendChild el
+    container.style.width = style.width
+    container.style.height = style.height
+    container.style.top = rect.top + o_top + 'px'
+    container.style.left = rect.left - o_left + 'px'
+    # Refresh Google Map
+    center = do gmap.getCenter
+    google.maps.event.trigger gmap, 'resize'
+    gmap.setCenter center
+    
+w = do $(window).width
+
+window.onresize = -> 
+  # Fix for resize trigger mobile scroll
+  width = do $(@).width
+  return if loaded and width is w
+  w = width
+
+  document.body.classList.add 'resize'
+  
+  delay ->
+    # Slick
+    # Fix for dynamic height
+    slick = $ '[slick]'
+    if slick.slick?
+      slick = slick.slick 'getSlick'
+      slick.$list.height ''
+    do gmaps
+    document.body.classList.remove 'resize'
+  , 500
+  
+  return
+
 ## Google Fonts
 WebFont.load
   google:
@@ -5,16 +80,16 @@ WebFont.load
       'Oswald:700:latin' 
       'Dosis:600:latin'
       'Playfair+Display:400,700:latin'
+      'Poiret+One::latin'
     ]
     
   active: ->
-  
     $('h1', '#main .page .content > header').slabText
       fontRatio: 0.25
       minCharsPerLine: 8
       resizeThrottleTime: 250
       
-    $(window).trigger 'resize'
+    do window.onresize.call
 
 ## Google Analytics
 ((i, s, o, g, r, a, m) ->
@@ -105,7 +180,7 @@ window.gmap = ->
 
     google.maps.event.addListenerOnce gmap, 'idle', ->
       map.el.classList.add 'map-loaded'
-      $(window).trigger 'resize'
+      do window.onresize.call
 
     j = 0
     while j < map.coords.length
@@ -302,75 +377,10 @@ angular
     ($templateCache) ->
       templates = document.querySelectorAll 'script[type="text/ng-template"]'
       angular.forEach templates, (template) ->
-        $templateCache.put template.id, template.innerHTML 
+        $templateCache.put template.id, template.innerHTML     
       return
   ])
   
   
-delay = do ->
-  timer = 0
-  (callback, ms) ->
-    clearTimeout timer
-    timer = setTimeout(callback, ms)
-    return
-    
-gmaps = ->
-  # Google Maps
-  # Fix for map not rendering in n > 1 column (Chrome)
-  for prop of @maps
-    return unless @maps.hasOwnProperty prop
-    map = @maps[prop]
-    el = map.el
-    gmap = map.gmap
-    clone = document.getElementById "#{el.id}-clone"
-    unless clone
-      clone = el.cloneNode false
-      clone.id += '-clone'
-      clone.classList.add 'map-clone'
-      clone.style.display = 'inline-block'
-      el.parentNode.insertBefore clone, el
-    style = window.getComputedStyle clone
-    rect = do clone.getBoundingClientRect
-    o_left = clone.parentNode.parentNode.parentNode.getBoundingClientRect().left
-    o_top = window.pageYOffset - parseInt style.marginTop, 10
-    container = document.getElementById "#{el.id}-container"
-    unless container
-      container = document.createElement el.tagName
-      container.id = "#{el.id}-container"
-      container.classList.add 'map-container'
-      container.style.position = 'absolute'
-      container.style.overflow = 'hidden'
-      el.style.margin = 0
-      el.style.padding = 0
-      el.style.width = '100%'
-      el.style.height = '100%'
-      el.parentNode.insertBefore container, el
-      container.appendChild el
-    container.style.width = style.width
-    container.style.height = style.height
-    container.style.top = rect.top + o_top + 'px'
-    container.style.left = rect.left - o_left + 'px'
-    # Refresh Google Map
-    center = do gmap.getCenter
-    google.maps.event.trigger gmap, 'resize'
-    gmap.setCenter center
-    
-
-w = do $(window).width
-$(window).on 'resize', (e) -> 
-  
-  # Fix for resize trigger mobile scroll
-  width = do $(@).width
-  return if width is w
-  w = width
-
-  document.body.classList.add 'resize'
-  
-  delay ->
-    # Slick
-    # Fix for dynamic height
-    slick = $('[slick]').slick 'getSlick'
-    slick.$list.height ''
-    do gmaps
-    document.body.classList.remove 'resize'
-  , 500
+window.onload = ->
+  loaded = true
