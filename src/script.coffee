@@ -22,7 +22,8 @@ gmaps = ->
       clone = el.cloneNode false
       clone.id += '-clone'
       clone.classList.add 'map-clone'
-      clone.style.display = 'block'
+      clone.style.display = 'inline-block'
+      clone.style.fontSize = 0
       el.parentNode.insertBefore clone, el
     style = window.getComputedStyle clone
     rect = do clone.getBoundingClientRect
