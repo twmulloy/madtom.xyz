@@ -23,6 +23,8 @@ gmaps = ->
       clone.id += '-clone'
       clone.classList.add 'map-clone'
       clone.style.display = 'inline-block'
+      clone.style.marginTop = '-2px'
+      clone.style.marginBottom = '-2px'
       clone.style.fontSize = 0
       el.parentNode.insertBefore clone, el
     style = window.getComputedStyle clone
@@ -151,12 +153,75 @@ window.gmap = ->
     ]
     
   maps = [
-    el: document.getElementById 'venue'
-    coords: [
-      lat: 47.6536064
-      lng: -122.3284513
-    ] 
-  ]
+    {
+      el: document.getElementById 'venue'
+      coords: [
+        lat: 47.6536064
+        lng: -122.3284513
+      ]
+    },{  
+      el: document.getElementById 'hyatt8'
+      coords: [
+        lat: 47.6138053
+        lng: -122.3363746
+      ]
+    },{  
+      el: document.getElementById 'eats'
+      zoom: 12,
+      coords: [
+        # Shiki
+        {
+          lat: 47.6258826
+          lng: -122.359353
+        },
+        # Pike Place
+        {
+          lat: 47.6097271
+          lng: -122.3465704
+        },
+        # RockCreek
+        {
+          lat: 47.6595047
+          lng: -122.3517322
+        },
+      ]
+    },{  
+      el: document.getElementById 'places'
+      zoom: 11,
+      coords: [
+        # Lake Union
+        {
+          lat: 47.6336462
+          lng: -122.3379969
+        },
+        # Pike Place
+        {
+          lat: 47.6097271
+          lng: -122.3465704
+        },
+        # Seattle Center
+        {
+          lat: 47.622042
+          lng: -122.3541892
+        },
+        # Green Lake
+        {
+          lat: 47.6778049
+          lng: -122.3422588
+        },
+        # Seattle Ferry Terminal
+        {
+          lat: 47.6024983
+          lng: -122.3401822
+        },
+        # Sculpture Park
+        {
+          lat: 47.6165162
+          lng: -122.3576973
+        },
+      ]
+    }
+   ]
 
   @maps = {}
 
@@ -168,12 +233,12 @@ window.gmap = ->
       el: map.el
       gmap: new google.maps.Map map.el,
         center: map.coords[0]
-        zoom: 14
+        zoom: if map.zoom? then map.zoom else 14
         backgroundColor: 'rgba(0,0,0,0)'
         disableDefaultUI: true
         zoomControl: false
-        maxZoom: 15
-        minZoom: 13
+        maxZoom: 16
+        minZoom: 10
         styles: opts.styles
       markers: []
                 

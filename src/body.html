@@ -1,11 +1,11 @@
 <body ng-controller="body" ng-cloak>
 
-  <nav ng-cloak>
-    <a class="page-back">{{ page_back }}</a>
-    <a class="page-next">{{ page_next }}</a>
+  <nav>
+    <a class="page-back" ng-cloak>{{ page_back }}</a>
+    <a class="page-next" ng-cloak>{{ page_next }}</a>
   </nav>
 
-  <main ng-include="'main.html'" id="main" slick pages="pages" ng-cloak></main>
+  <main ng-include="'main.html'" id="main" slick pages="pages"></main>
 
   <script type="text/ng-template" id="main.html">
     <section ng-repeat="page in pages" class="page">
@@ -24,76 +24,98 @@
   <script type="text/ng-template" id="home.html">
 
     <header>
-      <h1>Madeline Rose Froning</h1>
-      <h1>Thomas Wailani Mulloy</h1>
+      <h1>Madeline Froning</h1>
+      <h1>Thomas Mulloy</h1>
     </header>
 
     <div ng-include="'divider.html'" class="divider"></div>
 
     <main>
 
+      <article>
+        <header>
+          <h3>Froning &amp; Mulloy Merger Imminent</h3>
+          <hr class="p30" />
+        </header>
+        
+        <figure>
+          <img src="/images/madeline_thomas_01.jpg" />
+          <!--<figcaption>
+            <p>In molestie commodo hendrerit. Curabitur consequat vulputate quam, pellentesque suscipit elit ultricies in. Donec
+              porta elementum nisl in scelerisque. Pellentesque hendrerit diam at sem ullamcorper, quis vehicula velit feugiat.
+              Suspendisse vel aliquet eros. Cras vel tincidunt nulla.</p>
+          </figcaption>-->
+        </figure>
+        
+        <hr class="blank" />
+        
+        <p>TUCSON, Ariz. &mdash; What started as a chance encounter at a speakeasy near the University of Arizona is turning
+          into a lifetime commitment for Mr. Thomas Mulloy, of Tacoma, Washington, and Ms. Madeline Froning, of Tucson, Arizona.
+          The couple was friends for several years before they began their courtship while the bride-to-be was living in
+          the Caribbean and the future groom was residing in Chicago. They have since relocated to the Pacific Northwest
+          where they hope to welcome friends and family for a Fall wedding aboard the MV Skansonia on North Lake Union.</p>
+        
+
+
+
+        <hr class="p50" />
+      </article>
+
       <article class="box">
         <div class="wrap">
           <h1>Wedding:</h1>
+          <hr class="blank" />
           <p>Mr. &amp; Mrs. Don Froning request the pleasure of your company at the marriage of their daughter</p>
-          <p>
-            Madeline Rose Froning
-            <br/> to
-            <br/> Thomas Wailani Mulloy
-          </p>
-          <p>
-            Friday, October 21, 2016
-            <br/> <span>All Aboard......5:00 P.M.
-            <br/> Ceremony........5:30 P.M.
-            <br/> Reception to Follow
-            <br/> Adults Only
-          </p>
-          <p>
-            MV Skansonia
-            <br/> 205 NE Northlake Way
-            <br/>
-            <q>A</q> Dock
-            <br/> Seattle, WA 98105
-            <br/>
-            <a href="http://www.skansonia.com" target="_blank">www.skansonia.com</a>
-          </p>
+
+          <hr class="blank" />
+
+          <h2>Madeline Rose Froning</h2>
+          <h2 class="cushion">&mdash; to &mdash;</h2>
+          <h2>Thomas Wailani Mulloy</h2>
+
+          <hr class="p10" />
+
+          <h3 class="cushion">Friday, October 21, 2016</h3>
+
+
+          <ul class="leaders">
+            <li>
+              <span>All Aboard</span>
+              <span>5:00 P.M</span>
+            </li>
+            <li>
+              <span>Ceremony</span>
+              <span>5:30 P.M</span>
+            </li>
+
+            <li>
+              <span>Reception</span>
+              <span>to Follow</span>
+            </li>
+          </ul>
+
+          <hr class="blank" />
+
+          <h2 class="cushion">Adults Only</h2>
+
+          <hr class="p10" />
+
+          <p><strong><a href="http://www.skansonia.com" target="_blank">MV Skansonia</a></strong></p>
+
+          <p>205 NE Northlake Way</p>
+          <p><q>A</q> Dock</p>
+          <p>Seattle, WA 98105</p>
+
         </div>
         <div class="map" id="venue"></div>
       </article>
 
       <article>
         <header>
-          <h2>Mulloy&ndash;Froning Merger</h2>
+          <h3>Retired WA State Ferry New Life As <q>Seattle&rsquo;s Premier Waterfront Venue</q></h3>
           <hr class="p30" />
         </header>
-        <p>TUCSON, Ariz. &mdash; What started as a chance encounter at a speakeasy near the University of Arizona is turning
-          into a lifetime commitment for Mr. Thomas Mulloy, of Tacoma, Washington, and Ms. Madeline Froning, of Tucson, Arizona.
-          The couple was friends for several years before they began their courtship while the bride-to-be was living in
-          the Caribbean and the future groom was residing in Chicago’s <q>Windy City</q>. They have since relocated to the
-          Pacific Northwest where they hope to welcome friends and family for a Fall wedding aboard the MV Skansonia on North
-          Lake Union.</p>
-        <hr class="p50" />
-      </article>
 
-
-      <article>
-        <figure>
-          <img src="/images/placeholder.png" />
-          <figcaption>
-            <p>In molestie commodo hendrerit. Curabitur consequat vulputate quam, pellentesque suscipit elit ultricies in. Donec
-              porta elementum nisl in scelerisque. Pellentesque hendrerit diam at sem ullamcorper, quis vehicula velit feugiat.
-              Suspendisse vel aliquet eros. Cras vel tincidunt nulla.</p>
-          </figcaption>
-        </figure>
-
-        <hr class="p50" />
-      </article>
-
-      <article>
-        <header>
-          <h3>Retired WA State Ferry New Life As <q>Seattle&apos;s Premier Waterfront Venue</q></h3>
-          <hr class="p30" />
-        </header>
         <p>TACOMA, Wash. &mdash; The story of the Skansonia begins at the Skansie Brothers Shipyard in Gig Harbor where the
           keel for a brand new ferryboat was laid on July 9, 1929. This was to be the Skansonia which was built for the run
           between Point Defiance and Gig Harbor. The Skansonia was built and ready for her engines in only six weeks time.
@@ -109,10 +131,11 @@
           active service.In 1971 the WSF decided the Skansonia was surplus and she was listed for sale. In May 1971, the
           Skansonia was sold to Norm Volotin of Seattle who moored her on Lake Washington.</p>
 
+        <hr class="blank" />
         <figure>
           <img src="images/skansonia_01.jpg" />
           <figcaption>
-            June 1951 &ndash; the Skansonia became part of the Washington State Ferry Fleet.
+            June 1951 &mdash; the Skansonia became part of the Washington State Ferry Fleet.
           </figcaption>
 
           <hr class="p20" />
@@ -120,14 +143,7 @@
 
         <p>The MV Skansonia was sold and given a new life to become a premier private event facility, specializing in outdoor
           or indoor weddings and receptions. She sits on the North shore of Lake Union with an unsurpassed view of Seattle
-          and the Space Needle. While her outside look remains the same, she now boasts many improvements such as forced
-          air heat, large bay doors that open up to the patio, fireplace downstairs, oversized furniture from a 16th century
-          castle, and vintage light fixtures from the Seattle Music Theatre.</p>
-
-        <p>Beginning in 2009 she had a complete interior redesign from head to toe. The new re-designed bathrooms, carpets,
-          and freshly painted ceilings and walls keep her as a favorite venue for people seeking a truly historic piece of
-          Pacific Northwest history. Perfect for any season, and accommodating to Weddings, Bar Mitzvahs, and Holiday Parties
-          of all sizes.</p>
+          and the Space Needle.</p>
 
         <hr class="p50" />
       </article>
@@ -147,7 +163,7 @@
     <main>
       <article>
         <header>
-          <h2>Tourism on the rise</h2>
+          <h3>Emerald City Tourism on the Rise</h3>
           <hr class="p30" />
         </header>
 
@@ -161,22 +177,31 @@
 
       <article>
         <header>
-          <h2>Hotels</h2>
-          <hr class="p30" />
-          <h3>Hyatt Olive 8</h3>
-          <hr class="p20" />
+          <h2 class="center">Lodging</h2>
+          <hr class="p40" />
+        </header>
+
+        <header>
+          <h5>Hyatt Olive 8</h5>
+          <hr class="blank" />
         </header>
         <p>Located downtown at Olive Way and 8th Avenue, this hotel puts you in walking distance to Pike Market, the Pier, Seattle
           Center, tons of great shopping and incredible restaurants. It is also about a 10 minute Uber ride from our wedding
           venue.
         </p>
+
         <p>We have reserved a room block at this hotel and will be staying there ourselves before and after the wedding. The
           last day to book a room at the <a href="https://resweb.passkey.com/go/FroningMulloy2016" target="_blank">Hyatt Olive 8</a>          at a discounted rate is September 5<sup>th</sup>.</p>
-        <hr class="p50" />
+
+        <hr class="blank" />
+
+        <div class="map" id="hyatt8"></div>
+
+        <hr class="p20" />
 
         <header>
-          <h3>AirBNB</h3>
-          <hr class="p30" />
+          <h5>AirBNB</h5>
+          <hr class="blank" />
         </header>
         <p>As is the case in most cities these days, AirBNB is probably the most affordable option for staying in Seattle. We
           recommend looking for rentals in the following neighborhoods, both for their proximity to the venue and their local
@@ -190,31 +215,65 @@
 
       <article>
         <header>
-          <h2>Eats</h2>
-          <hr class="p30" />
+          <h2 class="center">Local Food</h2>
+          <hr class="p40" />
         </header>
         <p>Seattle is a city of foodies. You will not have any trouble finding tons great restaurant options . That being said,
           there are a few places we recommend to all of our out of town guests.</p>
         <hr class="p20" />
-        <p><a href="http://beechershandmadecheese.com/Locations/Seattle.aspx" target="blank">Beecher&apos;s</a> Handmade Cheese
-          &ndash; Located in the heart of Pike Place Market. Their Mac &amp; Cheese is life-changing. They now have a location
+        <p><a href="http://beechershandmadecheese.com/Locations/Seattle.aspx" target="blank">Beecher&rsquo;s</a> Handmade Cheese
+          &mdash; Located in the heart of Pike Place Market. Their Mac &amp; Cheese is life-changing. They now have a location
           in the airport, so you can always grab a bowl on your way out of town.</p>
-        <hr class="p10" />
+        <hr class="blank" />
 
-        <p><a href="http://www.pikeplacechowder.com/#!locations/c18rj" target="blank">Pike Place Chowder</a> &ndash; Also in
+        <p><a href="http://www.pikeplacechowder.com/#!locations/c18rj" target="blank">Pike Place Chowder</a> &mdash; Also in
           the Market. You really can’t go wrong here with anything, but the New England Clam and the Smoked Salmon chowders
           are definite favorites.</p>
-        <hr class="p10" />
+        <hr class="blank" />
 
-        <p><a href="http://www.shikijapaneserestaurant.com" target="blank">Shiki</a> Japanese Restaurant &ndash; Located in
+        <p><a href="http://www.shikijapaneserestaurant.com" target="blank">Shiki</a> Japanese Restaurant &mdash; Located in
           Lower Queen Anne. After experiencing all that Seattle has to offer for sushi you cannot go wrong with any place,
           but Shiki is hands down the best and most legit offering. While in season, Shiki is the only place in the Pacific
           Northwest that serves Fugu <q>PNWではフグが頂けるのが四季だけなのでこの機会をお見逃しなく</q>.</p>
-        <hr class="p10" />
 
-        <p><a href="http://www.rockcreekseattle.com" target="blank">Rock Creek</a> Seafood &amp; Spirits &ndash; Fresh seafood
+        <hr class="blank" />
+
+        <p><a href="http://www.rockcreekseattle.com" target="blank">Rock Creek</a> Seafood &amp; Spirits &mdash; Fresh seafood
           galore.They have over 20 different kinds of fish on the menu and you will want them all.
         </p>
+
+        <hr class="blank" />
+
+        <div class="map" id="eats"></div>
+        <hr class="p50" />
+      </article>
+
+      <article>
+        <header>
+          <h2 class="center">Things to do</h2>
+          <hr class="p40" />
+        </header>
+
+        <p>Part of the reason we booked the wedding on a Friday was so that our out of town guests can spend the rest of the weekend exploring the city.  You can find a lot of recommendations online, but below are a few places to consider checking out.</p>
+
+        <hr class="p20" />
+
+        <p>Pike Place Market &mdash; for delicious reasons outlined above.</p>
+
+        <hr class="blank" />
+        <p>Ferry or water taxi &mdash; take a water taxi to explore West Seattle (and if you do head to Sunfish for fish & chips)
+          or take a ferry to explore Bainbridge Island. Both leave from the piers just below downtown Seattle.</p>
+        <hr class="blank" />
+        <p>Seattle Center &mdash; See the Space Needle up close and check out Chihuly Garden & Glass if you are into enormous
+          hand-blown glass installations. Also home of the EMP (Experience Music Project).</p>
+        <hr class="blank" />
+        <p>Take a walk &mdash; Enjoy the three-mile loop around <a href="http://www.yelp.com/biz/green-lake-park-seattle" target="_blank">Green Lake</a>,
+          the six-mile stroll around <a href="http://www.wta.org/go-hiking/hikes/chesiahud-lake-union-loop" target="_blank">Lake Union</a>,
+          or walk along the piers to <a href="http://www.weissmanfredi.com/project/seattle-art-museum-olympic-sculpture-park"
+          target="_blank">Olympic Sculpture Park</a> for views of Puget Sound and some interesting artwork.</p>
+
+        <hr class="blank" />
+        <div class="map" id="places"></div>
         <hr class="p50" />
       </article>
     </main>
@@ -228,7 +287,11 @@
 
     <div ng-include="'divider.html'" class="divider"></div>
 
-    <main></main>
+    <a class="registry" href="http://www.crateandbarrel.com/gift-registry/madeline-froning-and-thomas-mulloy/r5497750" target="_blank"><img class="svg-crate-barrel" /></a>
+
+    <a class="registry" href="https://www.amazon.com/registry/wedding/HRHYJAX0UU85" target="_blank"><img class="svg-amazon" /></a>
+
+
   </script>
 
   <script>

@@ -1,5 +1,6 @@
 @require '_mixin'
 @require '_font'
+@require '_svg'
 
 @import '_ease'
 
@@ -47,7 +48,10 @@ video
 hr
   border 0
   border-bottom .1rem solid black
-  margin 0 auto
+  margin 1.0rem auto
+  
+  @media mq_mobile
+    margin .6rem auto
   
   &.p50
     width 50%
@@ -64,9 +68,22 @@ hr
   &.p10
     width 10%
     
+  &.blank
+    border-bottom 0
+    
 h1, h2, h3, h4, h5, h6, p
   margin 0
 
+q, 
+blockquote
+  quotes "“" "”" "‘" "’"
+  
+  &:before
+    content open-quote
+    
+  &:after
+    content close-quote
+  
 .cover
   background-color black
   height 200%
@@ -75,7 +92,6 @@ h1, h2, h3, h4, h5, h6, p
   width 100%
   
 .map
-  border .2rem solid black
   padding-bottom 100% // 1:1 Aspect ratio
   width 100%
   
@@ -87,6 +103,9 @@ h1, h2, h3, h4, h5, h6, p
     > *:nth-child(2),
     > *:last-child
       display none
+      
+.map-container
+  border .2rem solid black
   
 .slabtext
   opacity 1
@@ -103,6 +122,8 @@ h1, h2, h3, h4, h5, h6, p
   top 0
   white-space nowrap
   width 100vh
+  @media mq_mobile
+    font-size 1.0rem
 
 .page-back
   transform rotate(90deg)
@@ -177,6 +198,9 @@ body
     transform translate3d(0, 0, 0)
     font-size 1.4rem
     
+    @media mq_mobile
+      font-size 1.3rem
+    
     .slick-list
       &.draggable
         cursor -webkit-grab
@@ -188,7 +212,11 @@ body
     .page
       min-height 100vh
       position relative
-                
+      
+      .registry
+        display block
+        margin 2.0rem 0
+             
       .content
         padding 4.0rem
         
@@ -205,6 +233,12 @@ body
             .slabtext
               margin 2.0rem 0
               
+            @media mq_mobile
+              font-size 3.2rem
+              
+              .slabtext
+                margin 1.0rem 0
+              
         .divider
           border-top .1rem solid black
           border-bottom .1rem solid black
@@ -218,6 +252,9 @@ body
             text-align center
             text-transform uppercase
             word-spacing .5rem
+            
+            @media mq_mobile
+              font-size .8rem
             
         main
           vendor 'column-count', 3
@@ -233,58 +270,74 @@ body
           @media mq_beyond
             vendor 'column-count', 4
             
+          figure
+            display inline-block
+            margin 0
+            img 
+              border .2rem solid black
+              width 100%
+              
+              &[class^='svg-']
+                border 0
+                
+            figcaption
+              font-size .94em
+              line-height 1.38
+              margin .4rem 0
+            
           > article
-            padding 0.6rem
+            padding .6rem
             
             @media mq_mobile
-              padding-left 0
-              padding-right 0
+              padding .4rem 0
 
             > header
+              display inline-block
               margin 0
-              margin-bottom 1.0rem
+              width 100%
               h2
                 Dosis 4.2rem
                 line-height 1.0
-                margin-bottom 1.0rem
-                padding-top .1rem
-                  
+                
+                @media mq_mobile
+                  font-size 2.2rem
+                  text-align center
+                
               h3
                 Playfair 3.2rem, 700, false
                 line-height 1.0
-                margin-bottom 1.0rem
+                
+                @media mq_mobile
+                  font-size 1.8rem
+                
+              h5
+                Playfair 2.2rem, 400, false
+                line-height 1.0
+                
+                @media mq_mobile
+                  font-size 1.6rem
+                
+              .center
+                letter-spacing .4rem
+                text-align center
 
             > p,
             > em,
             figcaption    
               line-height 1.46
               text-align justify
-              text-indent 1.4rem
-              
-              &:last-of-type
-                padding 0 0 1.0rem
-              
-            > img
-              border .2rem solid black
-              width 100%
-              
-            > figure
-              margin 1.0rem 0
-              img 
-                border .2rem solid black
-                width 100%
-              figcaption
-                font-size .94em
-                line-height 1.38
-                margin 0.4rem 0 0
-                
-              &:first-child
-                margin 0
+              text-indent 1.4rem        
 
             &.box
               border .2rem solid black
+              display inline-block // Prevent splitting
               margin .6rem
               padding 0
+              
+              hr
+                margin 2.0rem auto
+                @media mq_mobile
+                  margin 1.2rem auto
               
               &:first-child
                 margin-left 0
@@ -298,11 +351,52 @@ body
                 
               h1
                 PoiretOne 2.8rem
+                @media mq_mobile
+                  font-size 2.0rem
+                
+              h2
+                PoiretOne 2.4rem
+                text-align center
+                @media mq_mobile
+                  font-size 1.6rem
+                
+              h3
+                text-align center
+                
+              .cushion
+                margin 1.0rem auto
+                @media mq_mobile
+                  margin .6rem auto
                 
               .wrap 
                 padding 2.0rem
+                @media mq_mobile
+                  padding 1.2rem
                 
-              .map
+              .leaders
+                overflow-x hidden
+                list-style none
+                padding 0
+                
+                li
+                  margin .6rem 0
+                  &:before
+                    float left
+                    width 0
+                    white-space nowrap
+                    content ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
+                
+                  span
+                    background-color white
+                    &:first-child
+                      font-weight 600
+                      padding-right .2rem
+                  
+                    & + span
+                      float right
+                      padding-left .2rem
+                      
+              .map-container
                 border 0
                 
                 &:last-child
@@ -321,6 +415,9 @@ body
           visibility visible
           &:hover
             background-color rgba(27, 25, 25, 0)
+            
+        img
+          width 100%
 
       &.slick-center
         .cover
