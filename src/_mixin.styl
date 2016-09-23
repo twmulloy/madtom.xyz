@@ -3,18 +3,18 @@ clear()
     content ''
     display table
     clear both
-    
+
 vendor(prop, args)
   -webkit-{prop} args
   -moz-{prop} args
 	{prop} args
-          
+
 transform()
 	vendor('transform', arguments)
-  
+
 transition()
 	vendor('transition', arguments)
-  
+
 wordbreak()
   vendor('hyphens', auto)
   vendor('word-break', break-all)

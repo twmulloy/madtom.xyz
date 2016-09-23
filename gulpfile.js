@@ -89,7 +89,7 @@ gulp.task('style', function () {
     .pipe(gulp.dest(path.dist));
 });
 
-gulp.task('script', function () {    
+gulp.task('script', function () {
   return gulp.src(manifest.scripts)
     .pipe(gulpif(/[.]coffee$/, dsl.coffee()))
     .pipe(min.script({}))
