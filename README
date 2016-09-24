@@ -1,8 +1,9 @@
 # Install
 $ npm i
+$ ./node_modules/bower/bin/bower i
 
 # Run
-$ gulp
+$ ./node_modules/gulp/bin/gulp.js
 
 # localhost
 `http://localhost:8080`
